@@ -90,7 +90,7 @@ function App() {
 
       <footer className="relative z-10 py-6 text-center border-t border-gray-200 mt-auto bg-white">
         <p className="text-sm text-gray-500 font-medium">
-          &copy; {new Date().getFullYear()} Academy of Tech Masters. All rights reserved.
+          &copy; {new Date().getFullYear()} Academy of Tech Masters.
         </p>
       </footer>
     </div>

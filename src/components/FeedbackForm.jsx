@@ -97,13 +97,12 @@ export default function FeedbackForm() {
         <Field 
           id="suggestion" 
           label="Additional Suggestions" 
-          helperText="Optional but highly appreciated."
         >
           <Textarea 
             id="suggestion" 
             value={formData.suggestion} 
             onChange={handleChange} 
-            placeholder="Any specific labs, tools, or support you'd like to see?" 
+            placeholder="Any questions to ask?" 
             rows={3}
           />
         </Field>

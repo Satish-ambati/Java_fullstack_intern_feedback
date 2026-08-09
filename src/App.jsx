@@ -45,7 +45,7 @@ function App() {
               <h2 className="text-4xl md:text-5xl font-extrabold text-brand-blue leading-tight">
                 Java Full Stack <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-orange">
-                  Internship Feedback
+                  Feedback
                 </span>
               </h2>
               <p className="mt-4 text-lg text-gray-600 leading-relaxed max-w-lg">
@@ -60,7 +60,7 @@ function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Support Call</h3>
-                  <a href="tel:8106204119" className="text-brand-orange hover:underline font-medium mt-1 inline-block">8106204119</a>
+                  <a href="tel:8019952233" className="text-brand-orange hover:underline font-medium mt-1 inline-block">+91 8019952233</a>
                 </div>
               </div>
               <div className="flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
@@ -69,7 +69,7 @@ function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Email Us</h3>
-                  <a href="mailto:satish.ambati0804@gmail.com" className="text-brand-blue hover:underline font-medium mt-1 inline-block break-all">satish.ambati0804@gmail.com</a>
+                  <a href="mailto:hr@aotms.com" className="text-brand-blue hover:underline font-medium mt-1 inline-block break-all">hr@aotms.com</a>
                 </div>
               </div>
             </div>

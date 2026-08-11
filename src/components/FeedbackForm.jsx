@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import StarRating from './StarRating';
 import Field from './Field';
+import Input from './Input';
 import Textarea from './Textarea';
 import SubmitButton from './SubmitButton';
 import Toast from './Toast';
@@ -9,7 +10,7 @@ import { submitFeedback } from '../services/feedbackApi';
 import { motion } from 'framer-motion';
 
 export default function FeedbackForm() {
-  const [formData, setFormData] = useState({ rating: 0, query: '', suggestion: '' });
+  const [formData, setFormData] = useState({ name: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState({ message: '', type: '' });
@@ -43,7 +44,7 @@ export default function FeedbackForm() {
     try {
       await submitFeedback(formData);
       setToast({ message: 'Feedback submitted successfully! Thank you.', type: 'success' });
-      setFormData({ rating: 0, query: '', suggestion: '' });
+      setFormData({ name: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
     } catch (err) {
       setToast({ message: err.message || 'Failed to submit feedback. Please try again.', type: 'error' });
     } finally {
@@ -66,6 +67,38 @@ export default function FeedbackForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Field 
+            id="name" 
+            label="Full Name" 
+            required 
+            error={errors.name}
+          >
+            <Input 
+              id="name" 
+              value={formData.name} 
+              onChange={handleChange} 
+              placeholder="Enter your full name" 
+              error={!!errors.name}
+            />
+          </Field>
+
+          <Field 
+            id="regdNumber" 
+            label="Registration Number" 
+            required 
+            error={errors.regdNumber}
+          >
+            <Input 
+              id="regdNumber" 
+              value={formData.regdNumber} 
+              onChange={handleChange} 
+              placeholder="" 
+              error={!!errors.regdNumber}
+            />
+          </Field>
+        </div>
+
         <Field 
           id="rating" 
           label="Course Rating" 

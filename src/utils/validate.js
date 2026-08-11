@@ -1,5 +1,13 @@
-export function validateFeedback({ rating, query }) {
+export function validateFeedback({ name, regdNumber, rating, query }) {
   const errors = {};
+
+  if (!name || !name.trim()) {
+    errors.name = "Please enter your name.";
+  }
+
+  if (!regdNumber || !regdNumber.trim()) {
+    errors.regdNumber = "Please enter your registration number.";
+  }
 
   if (!rating || rating < 1 || rating > 5) {
     errors.rating = "Please select a star rating.";

@@ -4,7 +4,7 @@ function doPost(e) {
     // Dynamically create the sheet name for today (e.g., "2026-05-11")
     const today = new Date();
     const dailySheetName = Utilities.formatDate(today, Session.getScriptTimeZone(), "yyyy-MM-dd");
-    const header = ["Timestamp", "Name", "Regd Number", "Rating", "Stars", "Query", "Suggestion"];
+    const header = ["Timestamp", "Name", "Email", "Regd Number", "Rating", "Stars", "Query", "Suggestion"];
 
     let dailySheet = doc.getSheetByName(dailySheetName);
 
@@ -19,11 +19,14 @@ function doPost(e) {
     if (lastRow === 0) {
       dailySheet.appendRow(header);
     } else {
-      // Migrate sheets created with an older header (e.g. missing Name/Regd Number)
+      // Migrate sheets created with an older header (e.g. missing Email/Name/Regd Number)
       const currentHeader = dailySheet.getRange(1, 1, 1, lastColumn).getValues()[0];
-      if (lastColumn < header.length && currentHeader[0] === "Timestamp") {
-        dailySheet.getRange(1, lastColumn + 1, 1, header.length - lastColumn)
-          .setValues([header.slice(lastColumn)]);
+      if (currentHeader[0] === "Timestamp" && lastColumn < header.length) {
+        const missing = header.filter(col => currentHeader.indexOf(col) === -1);
+        if (missing.length > 0) {
+          dailySheet.getRange(1, lastColumn + 1, 1, missing.length)
+            .setValues([missing]);
+        }
       }
     }
     const headerCount = dailySheet.getLastRow() >= 1 ? dailySheet.getLastColumn() : header.length;
@@ -38,6 +41,7 @@ function doPost(e) {
 
     const timestamp = data.timestamp || new Date().toLocaleString();
     const name = data.name || "";
+    const email = data.email || "";
     const regdNumber = data.regdNumber || "";
     const rating = parseInt(data.rating) || 0;
     const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
@@ -45,7 +49,7 @@ function doPost(e) {
     const suggestion = data.suggestion || "";
 
     // Save ONLY to the daily sheet
-    const rowData = [timestamp, name, regdNumber, rating, stars, query, suggestion];
+    const rowData = [timestamp, name, email, regdNumber, rating, stars, query, suggestion];
     dailySheet.appendRow(rowData);
 
     return ContentService.createTextOutput(JSON.stringify({

@@ -13,6 +13,7 @@ export async function submitFeedback(data) {
   const payload = {
     timestamp:  new Date().toISOString(),
     name:       (data.name || "").trim(),
+    email:      (data.email || "").trim(),
     regdNumber: (data.regdNumber || "").trim(),
     rating:     data.rating,
     query:      data.query.trim(),
@@ -23,6 +24,7 @@ export async function submitFeedback(data) {
     const formData = new URLSearchParams();
     formData.append("timestamp", payload.timestamp);
     formData.append("name", payload.name);
+    formData.append("email", payload.email);
     formData.append("regdNumber", payload.regdNumber);
     formData.append("rating", payload.rating);
     formData.append("query", payload.query);

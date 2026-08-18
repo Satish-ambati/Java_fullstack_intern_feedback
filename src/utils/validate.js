@@ -1,8 +1,16 @@
-export function validateFeedback({ name, regdNumber, rating, query }) {
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function validateFeedback({ name, email, regdNumber, rating, query }) {
   const errors = {};
 
   if (!name || !name.trim()) {
     errors.name = "Please enter your name.";
+  }
+
+  if (!email || !email.trim()) {
+    errors.email = "Please enter your email address.";
+  } else if (!EMAIL_PATTERN.test(email.trim())) {
+    errors.email = "Please enter a valid email address.";
   }
 
   if (!regdNumber || !regdNumber.trim()) {

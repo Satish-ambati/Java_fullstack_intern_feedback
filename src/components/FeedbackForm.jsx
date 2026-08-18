@@ -10,7 +10,7 @@ import { submitFeedback } from '../services/feedbackApi';
 import { motion } from 'framer-motion';
 
 export default function FeedbackForm() {
-  const [formData, setFormData] = useState({ name: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState({ message: '', type: '' });
@@ -44,7 +44,7 @@ export default function FeedbackForm() {
     try {
       await submitFeedback(formData);
       setToast({ message: 'Feedback submitted successfully! Thank you.', type: 'success' });
-      setFormData({ name: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
+      setFormData({ name: '', email: '', regdNumber: '', rating: 0, query: '', suggestion: '' });
     } catch (err) {
       setToast({ message: err.message || 'Failed to submit feedback. Please try again.', type: 'error' });
     } finally {
@@ -68,18 +68,36 @@ export default function FeedbackForm() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="sm:col-span-2">
+            <Field 
+              id="name" 
+              label="Full Name" 
+              required 
+              error={errors.name}
+            >
+              <Input 
+                id="name" 
+                value={formData.name} 
+                onChange={handleChange} 
+                placeholder="Enter your full name" 
+                error={!!errors.name}
+              />
+            </Field>
+          </div>
+
           <Field 
-            id="name" 
-            label="Full Name" 
+            id="email" 
+            label="Email Address" 
             required 
-            error={errors.name}
+            error={errors.email}
           >
             <Input 
-              id="name" 
-              value={formData.name} 
+              id="email" 
+              type="email" 
+              value={formData.email} 
               onChange={handleChange} 
-              placeholder="Enter your full name" 
-              error={!!errors.name}
+              placeholder="Enter your email address" 
+              error={!!errors.email}
             />
           </Field>
 
